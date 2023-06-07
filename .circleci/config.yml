@@ -74,7 +74,7 @@ parameters:
 
 
 commands:
-  say-hello:
+  say-hello-command:
     description: "Prints 'Hello' to the console"
     steps:
       - run:
@@ -89,20 +89,22 @@ anchors:
           - image: cimg/base:stable
         
   common_steps: &common_steps
-    - checkout
+          checkout
 
 jobs:
   say-hello:
+    # Reference the common docker anchor
     <<: *common_docker
+    # Additional steps specific to this job
     steps:
-      <<: *common_steps
-      - say-hello
+    # Reference the common steps anchor
+      -  *common_steps
+      - say-hello-command
       - persist_to_workspace:
           root: .
           paths:
             - .
 
- 
 workflows:
   say-hello-workflow:
     jobs:
