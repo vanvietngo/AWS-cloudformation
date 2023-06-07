@@ -57,7 +57,10 @@
 # 
 # 
 # 
-# COMMANDS
+# COMMANDS  & Anchor
+# 
+# 
+# 
 version: 2.1
 
 
@@ -79,12 +82,20 @@ commands:
           command: echo "Hello"
 
 
+# Define an anchor for the common steps
+anchors:
+  common_docker: &common_docker
+    docker:
+          - image: cimg/base:stable
+        
+  common_steps: &common_steps
+    - checkout
+
 jobs:
   say-hello:
-    docker:
-      - image: cimg/base:stable
+    <<: *common_docker
     steps:
-      - checkout
+      <<: *common_steps
       - say-hello
       - persist_to_workspace:
           root: .
