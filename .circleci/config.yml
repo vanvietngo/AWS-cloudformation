@@ -23,6 +23,9 @@ jobs:
       - run:
           name: "variable"
           command: "echo my variable $vietnv17"
+      - run:
+          name: "pipeline.id"
+          command: "echo pipeline.id =. <<pipeline.id>>"
 
   say-World:
     environment:
