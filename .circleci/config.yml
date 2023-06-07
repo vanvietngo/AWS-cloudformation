@@ -30,7 +30,8 @@ jobs:
     steps:
       - checkout
       - attach_workspace:
-        at: /tmp/workspace/text.txt
+        at: 
+          - /tmp/workspace/text.txt
       - run:
           name: "Say world"
           command: "cat text.txt!"
