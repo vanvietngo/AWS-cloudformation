@@ -8,19 +8,19 @@ jobs:
       - image: cimg/base:stable
     steps:
       - checkout
-      - persist_to_workspace:
-          root: /tmp/workspace/text.txt
-          paths:
-            - target/application.jar
-            - build/*
+            # - build/*
       - run:
           name: "Say hello"
-          command:  "echo Hello0000000000! > /tmp/workspace/text.txt"
+          command:  "echo Hello0000000000! > text.txt"
       - run:
           name: "variable"
           command: |
             VAR_0='Rasperi Pi'
             echo my variable $vietnv17 $VAR_0
+      - persist_to_workspace:
+          root: .
+          paths:
+            - .
   say-World:
     environment:
       pipeline_id: <<pipeline.id>>
@@ -30,18 +30,25 @@ jobs:
     steps:
       - checkout
       - attach_workspace:
-          at: 
-            - /tmp/workspace/text.txt
-      - run:
-          name: "Say world"
-          command: cat text.txt
+          at: .
       - run:
           name: "pipeline_id"
           command: "echo $pipeline_id"
+      - run:
+          name: test pwd cmd
+          command:     pwd
+      - run:
+          name: test ls cmd
+          command:     ls
+      - run:
+          name: "Say world"
+          command: cat text.txt
 workflows:
   say-hello-workflow:
     jobs:
       - say-hello
+          # requires: 
+          #   - say-World
       - say-World:
-          requires: 
+          requires:
             - say-hello
