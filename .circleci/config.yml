@@ -7,8 +7,8 @@ version: 2.1
 jobs:
   say-hello:
     environment:
-      - vietnv17: FPTSOFTWARE
-      - mssv: 17
+      vietnv17: FPTSOFTWARE
+      mssv: 17
     # Specify the execution environment. You can specify an image from Docker Hub or use one of our convenience images from CircleCI's Developer Hub.
     # See: https://circleci.com/docs/configuration-reference/#executor-job
     docker:
@@ -25,6 +25,9 @@ jobs:
           command: "echo my variable $vietnv17"
 
   say-World:
+    environment:
+      vietnv17: FPTSOFTWARE
+      mssv: 17
     # Specify the execution environment. You can specify an image from Docker Hub or use one of our convenience images from CircleCI's Developer Hub.
     # See: https://circleci.com/docs/configuration-reference/#executor-job
     docker:
