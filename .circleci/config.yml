@@ -23,13 +23,11 @@ jobs:
       - run:
           name: "variable"
           command: "echo my variable $vietnv17"
-      - run:
-          name: "pipeline.id"
-          command: "echo pipeline.id =. <<pipeline.id>>"
+      
 
   say-World:
     environment:
-      vietnv17: FPTSOFTWARE
+      pipeline_id: <<pipeline.id>>
       mssv: 17
     # Specify the execution environment. You can specify an image from Docker Hub or use one of our convenience images from CircleCI's Developer Hub.
     # See: https://circleci.com/docs/configuration-reference/#executor-job
@@ -43,8 +41,8 @@ jobs:
           name: "Say world"
           command: "echo World!"
       - run:
-          name: "variable 2"
-          command: "echo $mssv"
+          name: "pipeline_id"
+          command: "echo $pipeline.id"
 
 # Orchestrate jobs using workflows
 # See: https://circleci.com/docs/configuration-reference/#workflows
