@@ -1,0 +1,38 @@
+version: 2.1
+
+
+parameters:
+  myParameter:
+    type: string
+    default: "default value"
+  anotherParameter:
+    type: boolean
+    default: false
+
+
+commands:
+  say-hello:
+    description: "Prints 'Hello' to the console"
+    steps:
+      - run:
+          name: Say Hello
+          command: echo "Hello"
+
+
+jobs:
+  say-hello:
+    docker:
+      - image: cimg/base:stable
+    steps:
+      - checkout
+      - say-hello
+      - persist_to_workspace:
+          root: .
+          paths:
+            - .
+
+ 
+workflows:
+  say-hello-workflow:
+    jobs:
+      - say-hello
