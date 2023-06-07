@@ -42,7 +42,7 @@ jobs:
           command: "echo World!"
       - run:
           name: "pipeline_id"
-          command: "echo $pipeline.id"
+          command: "echo $pipeline_id"
 
 # Orchestrate jobs using workflows
 # See: https://circleci.com/docs/configuration-reference/#workflows
