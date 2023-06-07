@@ -34,14 +34,14 @@ jobs:
             - /tmp/workspace/text.txt
       - run:
           name: "Say world"
-          command: "cat text.txt"
+          command: cat text.txt
       - run:
           name: "pipeline_id"
           command: "echo $pipeline_id"
 workflows:
   say-hello-workflow:
     jobs:
-      - say-hello:
+      - say-hello
+      - say-World:
           requires: 
-            - say-World
-      - say-World
+            - say-hello
