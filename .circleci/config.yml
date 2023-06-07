@@ -22,7 +22,9 @@ jobs:
           command:  "echo Hello!"
       - run:
           name: "variable"
-          command: "echo my variable $vietnv17"
+          command: |
+            VAR_0='Rasperi Pi'
+            echo my variable $vietnv17 $VAR_0
       
 
   say-World:
