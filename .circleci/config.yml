@@ -1,54 +1,98 @@
+# version: 2.1
+# jobs:
+#   say-hello:
+#     environment:
+#       vietnv17: FPTSOFTWARE
+#       mssv: 17
+#     docker:
+#       - image: cimg/base:stable
+#     steps:
+#       - checkout
+#             # - build/*
+#       - run:
+#           name: "Say hello"
+#           command:  "echo Hello0000000000! > text.txt"
+#       - run:
+#           name: "variable"
+#           command: |
+#             VAR_0='Rasperi Pi'
+#             echo my variable $vietnv17 $VAR_0
+#       - persist_to_workspace:
+#           root: .
+#           paths:
+#             - .
+#   say-World:
+#     environment:
+#       pipeline_id: <<pipeline.id>>
+#       mssv: 17
+#     docker:
+#       - image: cimg/base:stable
+#     steps:
+#       - checkout
+#       - attach_workspace:
+#           at: .
+#       - run:
+#           name: "pipeline_id"
+#           command: "echo $pipeline_id"
+#       - run:
+#           name: test pwd cmd
+#           command:     pwd
+#       - run:
+#           name: test ls cmd
+#           command:     ls
+#       - run:
+#           name: "Say world"
+#           command: cat text.txt
+# workflows:
+#   say-hello-workflow:
+#     jobs:
+#       - say-hello
+#           # requires: 
+#           #   - say-World
+#       - say-World:
+#           requires:
+#             - say-hello
+
+
+# 
+# 
+# 
+# COMMANDS
 version: 2.1
+
+
+parameters:
+  myParameter:
+    type: string
+    default: "default value"
+  anotherParameter:
+    type: boolean
+    default: false
+
+
+commands:
+  say-hello:
+    description: "Prints 'Hello' to the console"
+    steps:
+      - run:
+          name: Say Hello
+          command: echo "Hello"
+
+
 jobs:
   say-hello:
-    environment:
-      vietnv17: FPTSOFTWARE
-      mssv: 17
     docker:
       - image: cimg/base:stable
     steps:
       - checkout
-            # - build/*
-      - run:
-          name: "Say hello"
-          command:  "echo Hello0000000000! > text.txt"
-      - run:
-          name: "variable"
-          command: |
-            VAR_0='Rasperi Pi'
-            echo my variable $vietnv17 $VAR_0
+      - say-hello
       - persist_to_workspace:
           root: .
           paths:
             - .
-  say-World:
-    environment:
-      pipeline_id: <<pipeline.id>>
-      mssv: 17
-    docker:
-      - image: cimg/base:stable
-    steps:
-      - checkout
-      - attach_workspace:
-          at: .
-      - run:
-          name: "pipeline_id"
-          command: "echo $pipeline_id"
-      - run:
-          name: test pwd cmd
-          command:     pwd
-      - run:
-          name: test ls cmd
-          command:     ls
-      - run:
-          name: "Say world"
-          command: cat text.txt
+
+ 
 workflows:
   say-hello-workflow:
     jobs:
       - say-hello
-          # requires: 
-          #   - say-World
-      - say-World:
-          requires:
-            - say-hello
