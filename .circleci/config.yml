@@ -116,7 +116,20 @@ jobs:
           command: exit 1
       - on-job-fail
 
+
+  handle-failure:
+    docker:
+      - image: circleci/node:14
+
+    steps:
+      - checkout
+      - run:
+          name: Error Handler Step
+          command: echo "Error handler executed"
 workflows:
   say-hello-workflow:
     jobs:
       - say-hello
+      - handle-failure:
+          requies:
+            -say-hellp
