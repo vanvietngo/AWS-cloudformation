@@ -131,5 +131,5 @@ workflows:
     jobs:
       - say-hello
       - handle-failure:
-          requies:
-            -say-hellp
+          requires:
+            - say-hello
