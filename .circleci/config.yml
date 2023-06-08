@@ -96,7 +96,7 @@ anchors:
           - image: cimg/base:stable
         
   common_steps: &common_steps
-          checkout
+    checkout
 
 jobs:
   say-hello:
@@ -111,6 +111,9 @@ jobs:
           root: .
           paths:
             - .
+      - run:
+          name: Failure Step
+          command: exit 1
       - on-job-fail
 
 workflows:
