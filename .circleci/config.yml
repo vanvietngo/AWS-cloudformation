@@ -74,6 +74,13 @@ parameters:
 
 
 commands:
+  on-job-fail:
+    description: "Only run when any Job fail"
+    steps:
+      - run:
+          name: On job fail
+          command: echo "Job fail"
+          when: on_fail
   say-hello-command:
     description: "Prints 'Hello' to the console"
     steps:
@@ -104,6 +111,7 @@ jobs:
           root: .
           paths:
             - .
+      - on-job-fail
 
 workflows:
   say-hello-workflow:
